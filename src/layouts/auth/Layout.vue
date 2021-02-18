@@ -1,11 +1,9 @@
 <template>
-  <div>
-    Aut layout
+  <div id="auth-layout">
+    <slot></slot>
   </div>
 </template>
 
-<script>
-export default {}
-</script>
-
-<style lang="scss" scoped></style>
+<style lang="scss">
+@import '@/assets/sass/layouts/auth/app';
+</style>

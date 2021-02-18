@@ -2,14 +2,20 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+import auth from '@/router/auth'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
+    meta: {
+      middleware: ['auth'],
+    },
     component: Home,
   },
+  ...auth,
 ]
 
 const router = new VueRouter({

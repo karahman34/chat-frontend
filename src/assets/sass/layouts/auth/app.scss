@@ -1,0 +1,10 @@
+$bg-color: rgb(29, 29, 56);
+
+#auth-layout {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $bg-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
