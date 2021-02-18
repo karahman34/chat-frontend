@@ -1,5 +1,5 @@
 <template>
-  <div id="login-page">
+  <div id="register-page">
     <!-- Top Header -->
     <div class="text-3xl text-center text-white mb-3">
       <i class="mdi mdi-chat mr-1"></i>
@@ -9,36 +9,43 @@
     <!-- The Card -->
     <card>
       <card-header>
-        Login
+        Register
       </card-header>
 
       <card-content>
         <!-- The Form -->
-        <form @submit.prevent="login">
-          <!-- Username -->
+        <form @submit.prevent="register">
+          <!-- Email -->
           <div>
-            <label for="email_or_username" class="block mb-1"
-              >Email / Username</label
-            >
+            <label for="email" class="block mb-1">Email</label>
             <custom-input
-              id="email_or_username"
-              placeholder="Email / Username"
-              v-model="form.email_or_username"
+              id="email"
+              placeholder="Email"
+              v-model="form.email"
             ></custom-input>
 
-            <text-error v-if="errors.email_or_username">
-              {{ errors.email_or_username }}
+            <text-error v-if="errors.email">
+              {{ errors.email }}
+            </text-error>
+          </div>
+
+          <!-- Username -->
+          <div>
+            <label for="username" class="block mb-1">Username</label>
+            <custom-input
+              id="username"
+              placeholder="Username"
+              v-model="form.username"
+            ></custom-input>
+
+            <text-error v-if="errors.username">
+              {{ errors.username }}
             </text-error>
           </div>
 
           <!-- Password -->
           <div class="my-2">
-            <div class="flex justify-between">
-              <label for="password" class="block mb-1">Password</label>
-              <router-link to="#" class="text-blue-600 hover:underline"
-                >Forgot password?</router-link
-              >
-            </div>
+            <label for="password" class="block mb-1">Password</label>
 
             <custom-input
               id="password"
@@ -52,15 +59,28 @@
             </text-error>
           </div>
 
+          <!-- Password Confirmation -->
+          <div class="my-2">
+            <label for="password_confirmation" class="block mb-1"
+              >Password Confirmation</label
+            >
+            <custom-input
+              id="password_confirmation"
+              type="password"
+              placeholder="Password Confirmation"
+              v-model="form.password_confirmation"
+            ></custom-input>
+          </div>
+
           <!-- Submit Btn -->
-          <submit-button :loading="loading">Login</submit-button>
+          <submit-button :loading="loading">Register</submit-button>
 
           <hr class="my-1" />
 
           <div class="text-center">
-            <span class="mr-1">Dont have an account ?</span>
-            <router-link :to="{ name: 'Register' }" class="text-blue-600"
-              >Sign up here!</router-link
+            <span class="mr-1">Already have an account ?</span>
+            <router-link :to="{ name: 'Login' }" class="text-blue-600"
+              >Sign in here!</router-link
             >
           </div>
         </form>
@@ -83,7 +103,7 @@ import SubmitButton from '@/components/auth/Form/SubmitButton'
 import TextError from '@/components/auth/Form/TextError'
 
 export default {
-  name: 'LoginPage',
+  name: 'RegisterPage',
 
   components: {
     Card,
@@ -97,11 +117,14 @@ export default {
   data() {
     return {
       form: {
-        email_or_username: null,
+        email: null,
+        username: null,
         password: null,
+        password_confirmation: null,
       },
       errors: {
-        email_or_username: null,
+        email: null,
+        username: null,
         password: null,
       },
       loading: false,
@@ -116,14 +139,14 @@ export default {
 
   methods: {
     ...mapActions('auth', {
-      loginAction: 'login',
+      registerAction: 'register',
     }),
-    async login() {
+    async register() {
       this.loading = true
       hideValidationErrors(this.errors)
 
       try {
-        await this.loginAction(this.form)
+        await this.registerAction(this.form)
 
         this.$router.push({
           name: 'Home',
@@ -133,13 +156,8 @@ export default {
 
         if (errCode === 422) {
           showValidationErrors(err.response.data.data, this.errors)
-        } else if (errCode === 401) {
-          this.$toasted.show('Invalid credentials.', {
-            icon: 'mdi-close-circle',
-            type: 'error',
-          })
         } else {
-          this.$toasted.show('Failed to authenthicate user.', {
+          this.$toasted.show('Failed to register user.', {
             icon: 'mdi-close-circle',
             type: 'error',
           })

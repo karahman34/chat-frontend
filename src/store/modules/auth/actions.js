@@ -2,6 +2,28 @@ import authApi from '@/api/authApi'
 import { removeToken, setToken } from '@/plugins/http'
 
 export default {
+  async register({ commit, dispatch }, payload) {
+    try {
+      const res = await authApi.register(payload)
+      const { data } = res.data
+      const { access_token, user } = data
+
+      const token = `Bearer ${access_token}`
+
+      // Set http token.
+      setToken(token)
+
+      commit('SET_TOKEN', token)
+      commit('SET_USER', user)
+      commit('SET_LOGGED_IN', true)
+
+      dispatch('updateLastOnline')
+
+      return Promise.resolve(res)
+    } catch (err) {
+      return Promise.reject(err)
+    }
+  },
   async login({ commit, dispatch }, payload) {
     try {
       const res = await authApi.login(payload)

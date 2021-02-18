@@ -10,6 +10,16 @@ const router = [
     },
     component: () => import('@/views/Login.vue'),
   },
+  {
+    path: `${prefix}/register`,
+    name: 'Register',
+    meta: {
+      layout: 'auth',
+      title: 'Register',
+      middleware: ['guest'],
+    },
+    component: () => import('@/views/Register.vue'),
+  },
 ]
 
 export default router
