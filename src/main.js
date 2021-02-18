@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 
 import 'tailwindcss/tailwind.css'
+import '@mdi/font/css/materialdesignicons.min.css'
 
 Vue.config.productionTip = false
 
