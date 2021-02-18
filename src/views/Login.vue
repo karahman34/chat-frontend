@@ -35,7 +35,9 @@
           <div class="my-2">
             <div class="flex justify-between">
               <label for="password" class="block mb-1">Password</label>
-              <router-link to="#" class="text-blue-600 hover:underline"
+              <router-link
+                :to="{ name: 'ForgotPassword' }"
+                class="text-blue-600 hover:underline"
                 >Forgot password?</router-link
               >
             </div>

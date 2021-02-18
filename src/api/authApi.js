@@ -3,6 +3,12 @@ import { http } from '@/plugins/http'
 const prefix = '/auth'
 
 export default {
+  forgotPassword(payload) {
+    return http.post(`${prefix}/forgot-password`, payload)
+  },
+  resetPassword(payload) {
+    return http.post(`${prefix}/reset-password`, payload)
+  },
   register(payload) {
     return http.post(`${prefix}/register`, payload)
   },
