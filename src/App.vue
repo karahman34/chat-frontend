@@ -25,6 +25,25 @@ export default {
         : 'default-layout'
     },
   },
+
+  mounted() {
+    this.setAppTitle()
+  },
+
+  watch: {
+    $route() {
+      this.setAppTitle()
+    },
+  },
+
+  methods: {
+    setAppTitle() {
+      const title = 'Chat App'
+      const routeTitle = this.$route.meta?.title
+
+      document.title = routeTitle ? `${routeTitle} | ${title}` : title
+    },
+  },
 }
 </script>
 
