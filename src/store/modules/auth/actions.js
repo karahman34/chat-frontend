@@ -91,6 +91,10 @@ export default {
         cb: null,
       })
 
+      commit('conversation/CLEAR_STATES', null, {
+        root: true,
+      })
+
       return Promise.resolve(res)
     } catch (err) {
       return Promise.reject(err)

@@ -7,6 +7,7 @@ import 'tailwindcss/tailwind.css'
 import '@mdi/font/css/materialdesignicons.min.css'
 import useMiddleware from './helpers/useMiddleware'
 import Toasted from 'vue-toasted'
+import { startEcho } from './plugins/echo'
 
 Vue.config.productionTip = false
 Vue.use(Http)
@@ -20,6 +21,9 @@ Vue.use(Toasted, {
 function initializeApp() {
   // Router Middlewares.
   useMiddleware(router, store)
+
+  // Echo.
+  startEcho()
 
   new Vue({
     router,

@@ -83,6 +83,7 @@ import CardContent from '@/components/auth/CardContent'
 import CustomInput from '@/components/auth/Form/Input'
 import SubmitButton from '@/components/auth/Form/SubmitButton'
 import TextError from '@/components/auth/Form/TextError'
+import { startEcho } from '@/plugins/echo'
 
 export default {
   name: 'LoginPage',
@@ -126,6 +127,8 @@ export default {
 
       try {
         await this.loginAction(this.form)
+
+        startEcho()
 
         this.$router.push({
           name: 'Home',
