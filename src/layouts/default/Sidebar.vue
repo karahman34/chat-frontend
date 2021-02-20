@@ -8,7 +8,7 @@
       >
         <div class="flex items-center">
           <!-- Avatar -->
-          <img :src="user.avatar" class="avatar mr-2" />
+          <img :src="user.avatar" class="user-avatar mr-2" />
 
           <div class="flex flex-col">
             <!-- Username -->

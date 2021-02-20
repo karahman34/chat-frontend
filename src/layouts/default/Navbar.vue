@@ -5,7 +5,7 @@
   >
     <!-- Left Side -->
     <div class="flex space-x-2 items-center">
-      <img :src="conversation.receiver.avatar" class="avatar" />
+      <img :src="conversation.receiver.avatar" class="user-avatar" />
 
       <div class="flex flex-col">
         <span>{{ conversation.receiver.username }}</span>

@@ -6,19 +6,18 @@ $page-height: calc(#{$wrapper-height} - #{$navbar-height});
   min-height: 100vh;
   background-color: #f3f4f6;
 
+  .user-avatar {
+    object-fit: cover;
+    width: 53px;
+    height: 53px;
+    border-radius: 50%;
+  }
+
   #sidebar {
     width: 45%;
 
     .user-container {
       height: $navbar-height;
-    }
-
-    .avatar {
-      display: inline;
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 50%;
     }
 
     ::-webkit-scrollbar {
@@ -38,14 +37,6 @@ $page-height: calc(#{$wrapper-height} - #{$navbar-height});
 
   #navbar {
     height: $navbar-height;
-
-    .avatar {
-      display: inline;
-      width: 60px;
-      height: 60px;
-      object-fit: cover;
-      border-radius: 50%;
-    }
   }
 
   section.wrapper {
