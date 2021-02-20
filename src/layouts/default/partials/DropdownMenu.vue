@@ -9,7 +9,7 @@
     <!-- Dropdown Menus -->
     <div
       v-if="model"
-      class="w-max z-50 absolute left-auto right-0 bg-gray-800 text-white rounded shadow-lg py-1 hover:bg-gray-700"
+      class="w-max z-50 absolute left-auto right-0 bg-gray-800 text-white rounded shadow-lg py-1"
     >
       <!-- Dropdown Item -->
       <slot></slot>
