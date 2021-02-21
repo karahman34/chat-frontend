@@ -2,7 +2,7 @@
   <div id="default-layout" v-if="loggedIn" class="px-3 flex items-center">
     <!-- Container -->
     <section
-      class="wrapper flex mx-auto bg-white shadow-xl w-full max-w-xl lg:max-w-5xl"
+      class="wrapper flex mx-auto bg-white shadow-xl rounded-2xl overflow-hidden w-full max-w-xl lg:max-w-5xl"
     >
       <!-- The Sidebar -->
       <sidebar
