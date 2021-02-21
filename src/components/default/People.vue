@@ -3,7 +3,7 @@
     class="people cursor-pointer py-3 border-b border-gray-300 flex space-x-2"
     @click="peopleClickHandler"
   >
-    <img :src="people.avatar" class="avatar" />
+    <img :src="people.avatar" class="user-avatar" />
 
     <div class="flex flex-col justify-center">
       <div class="flex items-center space-x-3">
