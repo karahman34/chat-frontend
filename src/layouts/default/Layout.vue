@@ -1,8 +1,8 @@
 <template>
   <div id="default-layout" v-if="loggedIn" class="px-3 flex items-center">
-    <!-- Container -->
-    <section
-      class="wrapper flex mx-auto bg-white shadow-xl rounded-2xl overflow-hidden w-full lg:max-w-5xl"
+    <!-- Chat Card -->
+    <div
+      class="chat-card flex mx-auto bg-white shadow-xl rounded-2xl overflow-hidden w-full lg:max-w-5xl"
     >
       <!-- The Sidebar -->
       <sidebar
@@ -15,11 +15,12 @@
 
       <!-- Content -->
       <section
-        class="content h-full w-full"
+        class="content"
         :class="{
           'sidebar-mobile-active': sidebarMobileActive,
         }"
       >
+        <!-- Default View -->
         <div
           v-if="!currentConversation"
           class="h-full flex flex-col justify-center items-center text-gray-600"
@@ -28,6 +29,7 @@
           <p class="text-2xl">Start Conversation.</p>
         </div>
 
+        <!-- Real Content -->
         <template v-else>
           <!-- The Navbar -->
           <navbar
@@ -36,10 +38,15 @@
           ></navbar>
 
           <!-- View -->
-          <slot></slot>
+          <div class="main">
+            <slot></slot>
+          </div>
+
+          <!-- Input -->
+          <chat-input :conversation="currentConversation"></chat-input>
         </template>
       </section>
-    </section>
+    </div>
 
     <!-- Update Profile Dialog -->
     <update-profile-dialog
@@ -60,9 +67,11 @@ import Sidebar from './Sidebar'
 import Navbar from './Navbar'
 import UpdateProfileDialog from '@/components/default/UpdateProfileDialog'
 import UpdatePasswordDialog from '@/components/default/UpdatePasswordDialog'
+import ChatInput from '@/components/default/ChatInput'
 
 export default {
   components: {
+    ChatInput,
     Sidebar,
     Navbar,
     UpdateProfileDialog,

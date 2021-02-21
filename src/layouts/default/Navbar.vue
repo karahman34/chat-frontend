@@ -1,16 +1,16 @@
 <template>
-  <div
+  <header
     id="navbar"
-    class="px-4 w-full border-b flex justify-between items-center space-x-2"
+    class="px-4 py-3 w-full border-b flex justify-between items-center"
   >
     <!-- Left Side -->
-    <div class="flex space-x-2 items-center">
+    <div class="flex items-center">
       <i
-        class="mdi mdi-arrow-left text-2xl cursor-pointer md:hidden"
+        class="mdi mdi-arrow-left text-2xl mr-2 cursor-pointer md:hidden"
         @click="$emit('hide')"
       ></i>
 
-      <img :src="conversation.receiver.avatar" class="user-avatar" />
+      <img :src="conversation.receiver.avatar" class="user-avatar mr-3" />
 
       <div class="flex flex-col">
         <span>{{ conversation.receiver.username }}</span>
@@ -49,7 +49,7 @@
         </dropdown-item>
       </dropdown-menu>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>

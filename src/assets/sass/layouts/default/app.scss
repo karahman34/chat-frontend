@@ -1,59 +1,13 @@
-$wrapper-height: 95vh;
-$navbar-height: 4.5rem;
-$page-height: calc(#{$wrapper-height} - #{$navbar-height});
+$main-height: 95vh;
 
 #default-layout {
   @apply bg-gray-800;
 
   min-height: 100vh;
 
-  .user-avatar {
-    object-fit: cover;
-    width: 53px;
-    height: 53px;
-    border-radius: 50%;
-  }
-
-  #sidebar {
-    width: 45%;
-
-    .user-container {
-      height: $navbar-height;
-    }
-
-    ::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    ::-webkit-scrollbar-track {
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-    }
-
-    @media screen and (max-width: 768px) {
-      width: 100%;
-
-      & {
-        display: none;
-      }
-
-      &.mobile-active {
-        display: block;
-      }
-    }
-  }
-
-  #navbar {
-    height: $navbar-height;
-  }
-
-  section.wrapper {
-    height: $wrapper-height;
+  .chat-card {
+    height: $main-height;
+    max-height: $main-height;
 
     @media screen and (max-width: 768px) {
       & {
@@ -64,15 +18,63 @@ $page-height: calc(#{$wrapper-height} - #{$navbar-height});
         display: none;
       }
     }
-  }
 
-  #home-page {
-    max-height: $page-height;
-  }
+    #sidebar {
+      height: 100%;
+      width: 45%;
+      display: flex;
+      flex-direction: column;
 
-  #chat-container {
-    max-height: calc(#{$page-height} - 55px);
+      .conversation-container {
+        flex-basis: 100%;
+      }
+
+      ::-webkit-scrollbar {
+        width: 3px;
+      }
+
+      ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+
+        & {
+          display: none;
+        }
+
+        &.mobile-active {
+          display: block;
+        }
+      }
+    }
+
+    section.content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      div.main {
+        flex-basis: 100%;
+        overflow: auto;
+      }
+    }
   }
+}
+
+.user-avatar {
+  object-fit: cover;
+  width: 53px;
+  height: 53px;
+  border-radius: 50%;
 }
 
 .online-indicator {

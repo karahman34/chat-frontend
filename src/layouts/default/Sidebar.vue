@@ -1,14 +1,14 @@
 <template>
-  <aside id="sidebar" class="border-r h-full bg-white">
+  <aside id="sidebar" class="border-r">
     <!-- Top Container -->
     <div class="top-container px-4">
       <!-- User Container -->
       <div
-        class="user-container py-2 mb-3 flex items-center justify-between border-b border-gray-300"
+        class="user-container py-3 mb-3 flex items-center justify-between border-b border-gray-300"
       >
         <div class="flex items-center">
           <!-- Avatar -->
-          <img :src="user.avatar" class="user-avatar mr-2" />
+          <img :src="user.avatar" class="user-avatar mr-3" />
 
           <div class="flex flex-col">
             <!-- Username -->
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Conversation Container -->
-    <div class="conversation-container px-4 h-full overflow-auto">
+    <div class="conversation-container px-4 overflow-auto">
       <!-- Loading -->
       <div
         v-if="getLastConversationLoading"
@@ -164,7 +164,6 @@ export default {
 
   mounted() {
     this.getLastConversations()
-    this.setContainerHeight()
   },
 
   methods: {
@@ -231,13 +230,6 @@ export default {
       } finally {
         this.getLastConversationLoading = false
       }
-    },
-    setContainerHeight() {
-      const topContainer = this.$el.querySelector('.top-container')
-      const container = this.$el.querySelector('.conversation-container')
-      const finalHeight = this.$el.clientHeight - topContainer.scrollHeight
-
-      container.style.maxHeight = finalHeight + 'px'
     },
     findLastMessage(conversation) {
       return Array.isArray(conversation.messages)

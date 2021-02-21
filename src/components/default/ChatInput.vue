@@ -1,7 +1,7 @@
 <template>
   <form
     id="form-chat"
-    class="absolute left-0 bottom-0 border-t border-gray-200 flex flex-col justify-center space-y-1 w-full py-2 px-3 bg-white"
+    class="border-t border-gray-200 flex flex-col justify-center space-y-1 w-full py-2 px-3 bg-white"
     @submit.prevent="createMessage"
   >
     <!-- File Preview -->

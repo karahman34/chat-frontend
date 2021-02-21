@@ -34,9 +34,6 @@
         :message="message"
       ></message-card>
     </div>
-
-    <!-- Input -->
-    <chat-input :conversation="currentConversation"></chat-input>
   </div>
 </template>
 
@@ -44,14 +41,12 @@
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import InfiniteLoading from 'vue-infinite-loading'
 import MessageCard from '@/components/default/MessageCard'
-import ChatInput from '@/components/default/ChatInput'
 
 export default {
   name: 'Home',
 
   components: {
     MessageCard,
-    ChatInput,
     InfiniteLoading,
   },
 
