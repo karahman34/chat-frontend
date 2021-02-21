@@ -5,6 +5,11 @@
   >
     <!-- Left Side -->
     <div class="flex space-x-2 items-center">
+      <i
+        class="mdi mdi-arrow-left text-2xl cursor-pointer md:hidden"
+        @click="$emit('hide')"
+      ></i>
+
       <img :src="conversation.receiver.avatar" class="user-avatar" />
 
       <div class="flex flex-col">

@@ -34,6 +34,18 @@ $page-height: calc(#{$wrapper-height} - #{$navbar-height});
       border-radius: 10px;
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
     }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+
+      & {
+        display: none;
+      }
+
+      &.mobile-active {
+        display: block;
+      }
+    }
   }
 
   #navbar {
@@ -42,6 +54,16 @@ $page-height: calc(#{$wrapper-height} - #{$navbar-height});
 
   section.wrapper {
     height: $wrapper-height;
+
+    @media screen and (max-width: 768px) {
+      & {
+        display: block;
+      }
+
+      &.sidebar-mobile-active {
+        display: none;
+      }
+    }
   }
 
   #home-page {

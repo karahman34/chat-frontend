@@ -1,6 +1,6 @@
 <template>
   <div
-    class="message-card px-4 flex flex-col space-y-1"
+    class="message px-4 flex flex-col space-y-1"
     :class="[
       {
         'items-end': message.sender === 'me',
@@ -10,38 +10,40 @@
     <!-- Only Image -->
     <div
       v-if="message.message === null && message.file"
-      class="shadow-md overflow-hidden w-max max-w-md cursor-pointer"
+      class="shadow-md overflow-hidden w-full max-w-sm cursor-pointer"
       @click="showUtilities = !showUtilities"
     >
-      <img
-        v-if="message.file"
-        :src="message.file"
-        class="w-full rounded-lg object-cover max-h-80"
-        style="min-height: 320px"
-      />
+      <message-image v-if="message.file" :image="message.file"></message-image>
     </div>
 
-    <!-- The Card -->
+    <!-- Card Container -->
     <div
       v-else
-      class="px-3 py-2 shadow rounded-lg w-max max-w-md cursor-pointer"
-      :class="[
-        {
-          'bg-gray-800 text-white': message.sender !== 'me',
-          'bg-white': message.sender === 'me',
-        },
-      ]"
-      @click="showUtilities = !showUtilities"
+      class="w-full max-w-sm flex"
+      :class="{
+        'justify-end': message.sender === 'me',
+      }"
     >
-      <img
-        v-if="message.file"
-        :src="message.file"
-        class="w-full mb-1 rounded-lg object-cover max-h-80"
-        style="min-height: 320px"
-      />
+      <!-- The Card -->
+      <div
+        class="message-card px-3 py-2 shadow rounded-lg w-max cursor-pointer"
+        :class="[
+          {
+            'bg-gray-800 text-white': message.sender !== 'me',
+            'bg-white': message.sender === 'me',
+          },
+        ]"
+        @click="showUtilities = !showUtilities"
+      >
+        <message-image
+          v-if="message.file"
+          class="mb-1"
+          :image="message.file"
+        ></message-image>
 
-      <!-- Text -->
-      <span>{{ message.message }}</span>
+        <!-- Text -->
+        <span>{{ message.message }}</span>
+      </div>
     </div>
 
     <!-- Utilities -->
@@ -77,8 +79,13 @@
 <script>
 import { mapActions } from 'vuex'
 import moment from 'moment'
+import MessageImage from '@/components/default/MessageImage'
 
 export default {
+  components: {
+    MessageImage,
+  },
+
   props: {
     conversation: {
       type: Object,

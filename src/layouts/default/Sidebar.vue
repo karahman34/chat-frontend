@@ -1,5 +1,5 @@
 <template>
-  <aside id="sidebar" class="border-r h-full">
+  <aside id="sidebar" class="border-r h-full bg-white">
     <!-- Top Container -->
     <div class="top-container px-4">
       <!-- User Container -->

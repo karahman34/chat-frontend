@@ -2,16 +2,24 @@
   <div id="default-layout" v-if="loggedIn" class="px-3 flex items-center">
     <!-- Container -->
     <section
-      class="wrapper flex mx-auto bg-white shadow-xl rounded-2xl overflow-hidden w-full max-w-xl lg:max-w-5xl"
+      class="wrapper flex mx-auto bg-white shadow-xl rounded-2xl overflow-hidden w-full lg:max-w-5xl"
     >
       <!-- The Sidebar -->
       <sidebar
+        :class="{
+          'mobile-active': sidebarMobileActive,
+        }"
         @update-profile="updateProfileDialog = true"
         @update-password="updatePasswordDialog = true"
       ></sidebar>
 
       <!-- Content -->
-      <section class="content h-full w-full">
+      <section
+        class="content h-full w-full"
+        :class="{
+          'sidebar-mobile-active': sidebarMobileActive,
+        }"
+      >
         <div
           v-if="!currentConversation"
           class="h-full flex flex-col justify-center items-center text-gray-600"
@@ -22,7 +30,10 @@
 
         <template v-else>
           <!-- The Navbar -->
-          <navbar :conversation="currentConversation"></navbar>
+          <navbar
+            :conversation="currentConversation"
+            @hide="hideNavbar"
+          ></navbar>
 
           <!-- View -->
           <slot></slot>
@@ -74,6 +85,9 @@ export default {
       currentConversation: 'currentConversation',
       getConversationByReceiver: 'getByReceiverId',
     }),
+    sidebarMobileActive() {
+      return !this.currentConversation
+    },
   },
 
   mounted() {
@@ -87,6 +101,7 @@ export default {
       addMessage: 'ADD_CONVERSATION_MESSAGE',
       setLastMessage: 'SET_LAST_CONVERSATION_MESSAGES',
       incrementUnreadMessages: 'INCREMENT_UNREAD_MESSAGES',
+      setCurrentConversationId: 'SET_CURRENT_CONVERSATION_ID',
     }),
     ...mapActions('conversation', {
       markReadAction: 'markRead',
@@ -134,6 +149,9 @@ export default {
           }
         },
       )
+    },
+    hideNavbar() {
+      this.setCurrentConversationId(null)
     },
   },
 }
