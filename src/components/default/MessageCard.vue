@@ -19,7 +19,7 @@
     <!-- Card Container -->
     <div
       v-else
-      class="w-full max-w-sm flex"
+      class="w-10/12 md:w-full md:max-w-sm flex"
       :class="{
         'justify-end': message.sender === 'me',
       }"
