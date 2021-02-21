@@ -3,8 +3,9 @@ $navbar-height: 4.5rem;
 $page-height: calc(#{$wrapper-height} - #{$navbar-height});
 
 #default-layout {
+  @apply bg-gray-800;
+
   min-height: 100vh;
-  background-color: #f3f4f6;
 
   .user-avatar {
     object-fit: cover;

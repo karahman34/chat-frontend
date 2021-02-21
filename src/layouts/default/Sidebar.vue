@@ -1,7 +1,7 @@
 <template>
   <aside id="sidebar" class="border-r h-full">
     <!-- Top Container -->
-    <div class="top-container px-3">
+    <div class="top-container px-4">
       <!-- User Container -->
       <div
         class="user-container py-2 mb-3 flex items-center justify-between border-b border-gray-300"
@@ -54,7 +54,7 @@
     </div>
 
     <!-- Conversation Container -->
-    <div class="conversation-container px-3 h-full overflow-auto">
+    <div class="conversation-container px-4 h-full overflow-auto">
       <!-- Loading -->
       <div
         v-if="getLastConversationLoading"
