@@ -83,12 +83,12 @@ export default {
       handler(val, old) {
         if (old) {
           this.prevReceiverId = old.receiver.id
-          this.toggleListenReceiverLastOnline(true)
+          this.toggleReceiverEvent(true)
         }
 
         this.infiniteId += 1
         this.markReadMessages()
-        this.toggleListenReceiverLastOnline()
+        this.toggleReceiverEvent()
       },
     },
     messages: {
@@ -109,6 +109,7 @@ export default {
 
   methods: {
     ...mapMutations('conversation', {
+      updateReceiverProfile: 'UPDATE_RECEIVER_PROFILE',
       updateReceiverLastOnline: 'UPDATE_RECEIVER_LAST_ONLINE',
     }),
     ...mapActions('conversation', {
@@ -155,20 +156,26 @@ export default {
         this.getConversationLoading = false
       }
     },
-    toggleListenReceiverLastOnline(stop = false) {
+    updateReceiverLastOnlineHandler(event) {
+      const { user } = event
+
+      this.updateReceiverLastOnline({
+        receiverId: user.id,
+        lastOnline: user.last_online,
+      })
+    },
+    updateReceiverProfileHandler(event) {
+      this.updateReceiverProfile(event.user)
+    },
+    toggleReceiverEvent(stop = false) {
       if (stop) {
         window.Echo.leave(`conversation.to.${this.prevReceiverId}`)
       } else {
         window.Echo.private(
           `conversation.to.${this.currentConversation.receiver.id}`,
-        ).listen('.last_online.updated', event => {
-          const { user } = event
-
-          this.updateReceiverLastOnline({
-            receiverId: user.id,
-            lastOnline: user.last_online,
-          })
-        })
+        )
+          .listen('.profile.updated', this.updateReceiverProfileHandler)
+          .listen('.last_online.updated', this.updateReceiverLastOnlineHandler)
       }
     },
     updateScroll() {
@@ -186,7 +193,7 @@ export default {
   },
 
   beforeDestroy() {
-    this.toggleListenReceiverLastOnline(true)
+    this.toggleReceiverEvent(true)
   },
 }
 </script>

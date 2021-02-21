@@ -5,7 +5,7 @@
       class="wrapper flex mx-auto bg-white shadow-xl w-full max-w-xl lg:max-w-5xl"
     >
       <!-- The Sidebar -->
-      <sidebar></sidebar>
+      <sidebar @update-profile="updateProfileDialog = true"></sidebar>
 
       <!-- Content -->
       <section class="content h-full w-full">
@@ -26,6 +26,12 @@
         </template>
       </section>
     </section>
+
+    <!-- Update Profile Dialog -->
+    <update-profile-dialog
+      :user="user"
+      v-model="updateProfileDialog"
+    ></update-profile-dialog>
   </div>
 </template>
 
@@ -33,11 +39,19 @@
 import { mapActions, mapGetters, mapMutations, mapState } from 'vuex'
 import Sidebar from './Sidebar'
 import Navbar from './Navbar'
+import UpdateProfileDialog from '@/components/default/UpdateProfileDialog'
 
 export default {
   components: {
     Sidebar,
     Navbar,
+    UpdateProfileDialog,
+  },
+
+  data() {
+    return {
+      updateProfileDialog: false,
+    }
   },
 
   computed: {

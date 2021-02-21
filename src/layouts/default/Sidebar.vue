@@ -26,6 +26,11 @@
 
         <!-- Menu -->
         <dropdown-menu>
+          <dropdown-item @click="$emit('update-profile')">
+            <i class="mdi mdi-account"></i>
+            <span>Profile</span>
+          </dropdown-item>
+
           <dropdown-item
             class="px-3 flex space-x-1 cursor-pointer "
             @click="goLogout"

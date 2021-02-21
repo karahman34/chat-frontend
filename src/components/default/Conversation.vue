@@ -4,7 +4,7 @@
     @click="openConversation"
   >
     <!-- Avatar -->
-    <img :src="conversation.receiver.avatar" class="avatar" />
+    <img :src="conversation.receiver.avatar" class="user-avatar" />
 
     <div class="flex flex-col w-full">
       <div class="flex justify-between items-center">

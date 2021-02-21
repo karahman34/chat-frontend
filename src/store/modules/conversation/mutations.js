@@ -77,6 +77,14 @@ export default {
     target.messages = []
     target.last_message = null
   },
+  UPDATE_RECEIVER_PROFILE(state, receiver) {
+    const target = state.conversations.find(
+      conversation =>
+        parseInt(conversation.receiver.id) === parseInt(receiver.id),
+    )
+
+    target.receiver = receiver
+  },
   UPDATE_RECEIVER_LAST_ONLINE(state, { receiverId, lastOnline }) {
     const target = state.conversations.find(
       conversation =>

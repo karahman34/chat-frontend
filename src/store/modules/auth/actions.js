@@ -1,4 +1,5 @@
 import authApi from '@/api/authApi'
+import profileApi from '@/api/profileApi'
 import { removeToken, setToken } from '@/plugins/http'
 
 export default {
@@ -53,6 +54,18 @@ export default {
 
       // Commits.
       commit('SET_USER', data)
+
+      return Promise.resolve(res)
+    } catch (err) {
+      return Promise.reject(err)
+    }
+  },
+  async updateProfile({ commit }, payload) {
+    try {
+      const res = await profileApi.update(payload)
+
+      // Commits.
+      commit('SET_USER', res.data.data)
 
       return Promise.resolve(res)
     } catch (err) {
