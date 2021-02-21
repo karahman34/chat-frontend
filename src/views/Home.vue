@@ -96,9 +96,16 @@ export default {
       handler(val, old) {
         if (val === null) {
           this.getConversationMessages()
+          return
         }
 
-        if (old === null || (Array.isArray(val) && val.length > old.length)) {
+        const valArray = Array.isArray(val)
+        const oldArray = Array.isArray(old)
+
+        if (
+          (valArray && old === undefined) ||
+          (valArray && oldArray && val.length > old.length)
+        ) {
           this.$nextTick(() => {
             this.updateScroll()
           })
