@@ -1,5 +1,5 @@
 function userStatus(lastOnline, now = null) {
-  if (now !== null) {
+  if (now === null) {
     now = new Date()
   }
 
