@@ -24,7 +24,7 @@
         :disabled="loading"
         @click="form.file = null"
       >
-        <i class="mdi mdi-close-circle cursor-pointer"></i>
+        <i class="mdi mdi-close-circle"></i>
       </button>
     </div>
 
