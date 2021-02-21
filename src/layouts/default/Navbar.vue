@@ -20,10 +20,11 @@
           :class="{ offline: userStatus === 'Offline' }"
           >{{ userStatus }}</span
         >
-        <i
-          v-else
-          class="mdi mdi-loading mdi-spin text-lg leading-5 text-gray-500"
-        ></i>
+        <div v-else class="user-status-loading ml-1">
+          <div></div>
+          <div class="mx-1"></div>
+          <div></div>
+        </div>
       </div>
     </div>
 
@@ -137,3 +138,39 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+@keyframes user-status-loading {
+  0% {
+    top: 0;
+  }
+
+  50% {
+    top: -2.5px;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+.user-status-loading {
+  div {
+    display: inline-block;
+    position: relative;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: rgb(150, 150, 150);
+    animation: user-status-loading 580ms infinite;
+  }
+
+  div:nth-child(2) {
+    animation-delay: 145ms;
+  }
+
+  div:nth-child(3) {
+    animation-delay: 290ms;
+  }
+}
+</style>
