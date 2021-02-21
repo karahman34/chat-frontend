@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="value"
-    class="dialog z-50 min-h-screen w-full fixed left-0 top-0 bg-gray-800 bg-opacity-50 flex items-center justify-center py-4 px-4"
+    class="dialog z-50 min-h-screen w-full fixed left-0 top-0 bg-gray-800 bg-opacity-50 flex items-center justify-center py-4 px-3"
   >
     <!-- Slot -->
     <transition name="scale">
