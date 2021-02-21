@@ -6,4 +6,7 @@ export default {
   update(payload) {
     return http.post(`${prefix}`, payload)
   },
+  updatePassword(payload) {
+    return http.post(`${prefix}/password`, payload)
+  },
 }

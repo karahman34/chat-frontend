@@ -31,6 +31,11 @@
             <span>Profile</span>
           </dropdown-item>
 
+          <dropdown-item @click="$emit('update-password')">
+            <i class="mdi mdi-lock"></i>
+            <span>Password</span>
+          </dropdown-item>
+
           <dropdown-item
             class="px-3 flex space-x-1 cursor-pointer "
             @click="goLogout"
