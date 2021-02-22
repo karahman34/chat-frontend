@@ -1,6 +1,6 @@
 <template>
   <div
-    class="conversation cursor-pointer py-3 border-b border-gray-300 flex space-x-2 items-center"
+    class="conversation cursor-pointer py-3 border-b border-gray-300 flex items-center"
     @click="openConversation"
   >
     <!-- Avatar -->

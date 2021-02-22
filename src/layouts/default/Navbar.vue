@@ -10,7 +10,7 @@
         @click="$emit('hide')"
       ></i>
 
-      <img :src="conversation.receiver.avatar" class="user-avatar mr-3" />
+      <img :src="conversation.receiver.avatar" class="user-avatar" />
 
       <div class="flex flex-col">
         <span>{{ conversation.receiver.username }}</span>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="people cursor-pointer py-3 border-b border-gray-300 flex space-x-2"
+    class="people cursor-pointer py-3 border-b border-gray-300 flex"
     @click="peopleClickHandler"
   >
     <img :src="people.avatar" class="user-avatar" />
