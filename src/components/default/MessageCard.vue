@@ -95,6 +95,10 @@ export default {
       type: Object,
       required: true,
     },
+    last: {
+      type: Boolean,
+      required: true,
+    },
   },
 
   filters: {
@@ -107,6 +111,12 @@ export default {
     return {
       deleteLoading: false,
       showUtilities: false,
+    }
+  },
+
+  mounted() {
+    if (this.last) {
+      this.showUtilities = true
     }
   },
 

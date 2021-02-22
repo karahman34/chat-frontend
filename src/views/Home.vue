@@ -32,6 +32,7 @@
         :key="message.id"
         :conversation="currentConversation"
         :message="message"
+        :last="lastMessage && lastMessage.id === message.id"
       ></message-card>
     </div>
   </div>
@@ -69,6 +70,11 @@ export default {
       }
 
       return [...this.currentConversation.messages].reverse()
+    },
+    lastMessage() {
+      return !Array.isArray(this.messages)
+        ? null
+        : this.messages[this.messages.length - 1]
     },
   },
 
