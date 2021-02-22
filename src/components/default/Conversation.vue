@@ -22,9 +22,7 @@
         <span
           class="text-gray-500"
           :class="{
-            italic:
-              lastMessageText === null ||
-              (!lastMessageText && lastMessage.file !== null),
+            italic: lastMessageText === null || lastMessage.file !== null,
           }"
         >
           {{ lastMessageText || 'empty chat.' | message }}
