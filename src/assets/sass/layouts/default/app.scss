@@ -9,24 +9,16 @@ $main-height: 95vh;
     height: $main-height;
     max-height: $main-height;
 
-    @media screen and (max-width: 768px) {
-      & {
-        display: block;
-      }
-
-      &.sidebar-mobile-active {
-        display: none;
-      }
-    }
-
     #sidebar {
       height: 100%;
-      width: 33%;
+      width: 100%;
+      max-width: 33%;
       display: flex;
       flex-direction: column;
 
       .conversation-container {
         flex-basis: 100%;
+        overflow: auto;
       }
 
       ::-webkit-scrollbar {
@@ -44,34 +36,32 @@ $main-height: 95vh;
       }
 
       @media screen and (max-width: 768px) {
-        width: 100%;
-
-        & {
-          display: none;
-        }
+        max-width: 0;
+        overflow: hidden;
 
         &.mobile-active {
-          display: block;
+          max-width: 100%;
         }
       }
     }
 
     section.content {
-      flex-grow: 1;
+      flex-basis: 100%;
+      overflow: hidden;
       height: 100%;
       display: flex;
       flex-direction: column;
 
-      @media screen and (min-width: 768px) {
-        & {
-          flex-grow: 0;
-          width: 67%;
-        }
-      }
-
       div.main {
         flex-basis: 100%;
         overflow: auto;
+      }
+
+      @media screen and (max-width: 768px) {
+        &.sidebar-mobile-active {
+          max-width: 0;
+          overflow: hidden;
+        }
       }
     }
   }

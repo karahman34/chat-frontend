@@ -54,7 +54,7 @@
     </div>
 
     <!-- Conversation Container -->
-    <div class="conversation-container px-4 overflow-auto">
+    <div class="conversation-container px-4">
       <!-- Loading -->
       <div
         v-if="getLastConversationLoading"
