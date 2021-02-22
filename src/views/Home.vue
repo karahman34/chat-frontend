@@ -109,6 +109,7 @@ export default {
         const oldArray = Array.isArray(old)
 
         if (
+          this.firstLoad ||
           (valArray && !old) ||
           (valArray && oldArray && val.length > old.length)
         ) {
@@ -196,12 +197,6 @@ export default {
       const chatContainer = this.$refs.chatContainer
 
       if (!this.infiniteLoading) {
-        if (this.firstLoad) {
-          this.$nextTick(() => {
-            chatContainer.scrollTop = chatContainer.scrollHeight
-          })
-        }
-
         chatContainer.scrollTop = chatContainer.scrollHeight
       }
     },

@@ -1,78 +1,70 @@
 <template>
   <div
-    class="message px-4 flex flex-col space-y-1"
+    class="message px-4 flex space-y-1 w-full"
     :class="[
       {
-        'items-end': message.sender === 'me',
+        'justify-end': senderIsMe,
       },
     ]"
   >
-    <!-- Only Image -->
+    <!-- Message Item Container -->
     <div
-      v-if="message.message === null && message.file"
-      class="shadow-md overflow-hidden cursor-pointer w-10/12 md:w-full md:max-w-sm"
-      @click="showUtilities = !showUtilities"
-    >
-      <message-image v-if="message.file" :image="message.file"></message-image>
-    </div>
-
-    <!-- Card Container -->
-    <div
-      v-else
-      class="w-10/12 md:w-full md:max-w-sm flex"
+      class="message-item-container"
       :class="{
-        'justify-end': message.sender === 'me',
+        sender: senderIsMe,
       }"
     >
-      <!-- The Card -->
+      <!-- Menu -->
+      <message-menu-dropdown
+        :sender-is-me="senderIsMe"
+        :loading-delete="deleteLoading"
+        @delete="deleteMessage"
+      ></message-menu-dropdown>
+
+      <!-- Card -->
       <div
-        class="message-card px-3 py-2 shadow rounded-lg w-max cursor-pointer"
+        class="message-card py-1 px-1 shadow rounded-lg w-max flex flex-col overflow-hidden"
         :class="[
           {
-            'bg-gray-800 text-white': message.sender !== 'me',
-            'bg-white': message.sender === 'me',
+            'bg-gray-800 text-white': !senderIsMe,
+            'bg-white items-end': senderIsMe,
           },
         ]"
-        @click="showUtilities = !showUtilities"
+        :title="createdTime"
       >
+        <!-- Image -->
         <message-image
           v-if="message.file"
-          class="mb-1"
+          :class="{
+            'mb-1': message.message,
+          }"
           :image="message.file"
         ></message-image>
 
-        <!-- Text -->
-        <span class="whitespace-pre-line">{{ message.message }}</span>
+        <!-- Text & Date -->
+        <div class="text-right px-2 flex justify-between space-x-2">
+          <!-- Text -->
+          <div v-if="message.message" class="whitespace-pre-line">
+            {{ message.message }}
+          </div>
+
+          <!-- Created Time -->
+          <span
+            class="created-time inline-flex items-center space-x-1 text-sm"
+            :class="{
+              'text-gray-500': senderIsMe && message.message,
+              'text-gray-200': !senderIsMe && message.message,
+              'side-bottom mt-auto': message.message,
+              'absolute right-4 bottom-2 text-gray-50':
+                message.file && !message.message,
+            }"
+          >
+            <i class="mdi mdi-clock"></i>
+            <span>{{ createdTime }}</span>
+          </span>
+        </div>
       </div>
     </div>
-
-    <!-- Utilities -->
-    <transition name="collapse">
-      <div
-        v-if="showUtilities"
-        class="utilities flex items-center space-x-3 text-gray-600"
-      >
-        <!-- Delete -->
-        <div
-          v-if="message.sender === 'me'"
-          class="flex items-center space-x-1 hover:underline"
-          :class="[deleteLoading ? 'cursor-wait' : 'cursor-pointer']"
-          @click="deleteMessage"
-        >
-          <i
-            class="mdi"
-            :class="[deleteLoading ? 'mdi-loading mdi-spin' : 'mdi-trash-can']"
-          ></i>
-          <span>{{ deleteLoading ? 'Deleting' : 'Delete' }}</span>
-        </div>
-
-        <!-- Created Time -->
-        <div class="flex items-center space-x-1">
-          <i class="mdi mdi-clock"></i>
-          <span>{{ createdTime }}</span>
-        </div>
-      </div>
-    </transition>
   </div>
 </template>
 
@@ -80,10 +72,12 @@
 import { mapActions } from 'vuex'
 import moment from 'moment'
 import MessageImage from '@/components/default/MessageImage'
+import MessageMenuDropdown from '@/components/default/MessageMenuDropdown'
 
 export default {
   components: {
     MessageImage,
+    MessageMenuDropdown,
   },
 
   props: {
@@ -104,9 +98,14 @@ export default {
   data() {
     return {
       deleteLoading: false,
-      showUtilities: false,
       createdTime: null,
     }
+  },
+
+  computed: {
+    senderIsMe() {
+      return this.message.sender === 'me'
+    },
   },
 
   created() {
@@ -114,10 +113,6 @@ export default {
   },
 
   mounted() {
-    if (this.initShowUtilities) {
-      this.showUtilities = true
-    }
-
     setInterval(() => this.setCreatedTime(), 1000 * 60)
   },
 
@@ -152,27 +147,48 @@ export default {
       }
     },
     setCreatedTime() {
-      this.createdTime = moment(this.message.created_at).fromNow()
+      this.createdTime = moment(this.message.created_at).from()
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-.collapse-enter-active,
-.collapse-leave-active {
-  height: 100%;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
-}
+.message {
+  .message-item-container {
+    position: relative;
+    width: max-content;
+    max-width: 85%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
 
-.collapse-enter-to,
-.collapse-leave {
-  max-height: 26px;
-}
+    .message-menu-dropdown {
+      margin-left: 0.75rem;
+    }
 
-.collapse-enter,
-.collapse-leave-to {
-  max-height: 0;
+    &.sender {
+      flex-direction: row;
+      justify-content: flex-end;
+
+      .message-menu-dropdown {
+        margin-left: 0;
+        margin-right: 0.75rem;
+      }
+    }
+
+    &:hover {
+      .message-menu-dropdown {
+        opacity: 1;
+      }
+    }
+  }
+
+  .created-time {
+    &.side-bottom {
+      position: relative;
+      bottom: -1px;
+    }
+  }
 }
 </style>
