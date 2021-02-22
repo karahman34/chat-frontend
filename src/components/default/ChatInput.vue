@@ -102,11 +102,7 @@ export default {
 
   computed: {
     disabled() {
-      return (
-        this.form.message &&
-        !this.form.message.length &&
-        this.form.file === null
-      )
+      return !this.form.message.length && this.form.file === null
     },
   },
 
