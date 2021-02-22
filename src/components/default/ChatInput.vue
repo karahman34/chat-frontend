@@ -55,6 +55,7 @@
 
         <!-- Message -->
         <div
+          ref="messageInput"
           :contenteditable="loading ? false : true"
           class="message z-30 min-w-full overflow-x-hidden overflow-y-auto focus:outline-none"
           @input="form.message = $event.target.textContent"
@@ -136,6 +137,7 @@ export default {
 
         this.form.file = null
         this.form.message = ''
+        this.$refs.messageInput.textContent = ''
       } catch (err) {
         this.$toasted.show(
           err?.response?.data?.message || 'Failed to create the message.',
