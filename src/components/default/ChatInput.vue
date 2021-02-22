@@ -59,6 +59,7 @@
           :contenteditable="loading ? false : true"
           class="message z-30 min-w-full overflow-x-hidden overflow-y-auto focus:outline-none"
           @input="form.message = $event.target.textContent"
+          @keydown="keydownHandler"
         ></div>
       </div>
 
@@ -98,6 +99,8 @@ export default {
         file: null,
       },
       loading: false,
+      shiftPress: false,
+      shiftPressOffTimeout: null,
     }
   },
 
@@ -118,6 +121,29 @@ export default {
       }
 
       this.$refs.inputFile.value = ''
+    },
+    keydownHandler(e) {
+      const key = e.key.toLowerCase()
+      const resetShift = () => {
+        clearTimeout(this.shiftPressOffTimeout)
+        this.shiftPressOffTimeout = setTimeout(
+          () => (this.shiftPress = false),
+          300,
+        )
+      }
+
+      if (key === 'shift') {
+        this.shiftPress = true
+        resetShift()
+      } else if (this.shiftPress && key === 'enter') {
+        resetShift()
+      } else if (!this.shiftPress && key === 'enter') {
+        e.preventDefault()
+
+        this.createMessage()
+      } else {
+        this.shiftPress = false
+      }
     },
     async createMessage() {
       if (this.loading) return
