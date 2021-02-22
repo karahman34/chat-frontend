@@ -69,7 +69,7 @@
         <!-- Created Time -->
         <div class="flex items-center space-x-1">
           <i class="mdi mdi-clock"></i>
-          <span>{{ message.created_at | createdTime }}</span>
+          <span>{{ createdTime }}</span>
         </div>
       </div>
     </transition>
@@ -101,23 +101,24 @@ export default {
     },
   },
 
-  filters: {
-    createdTime: function(value) {
-      return moment(value).fromNow()
-    },
-  },
-
   data() {
     return {
       deleteLoading: false,
       showUtilities: false,
+      createdTime: null,
     }
+  },
+
+  created() {
+    this.setCreatedTime()
   },
 
   mounted() {
     if (this.initShowUtilities) {
       this.showUtilities = true
     }
+
+    setInterval(() => this.setCreatedTime(), 1000 * 60)
   },
 
   methods: {
@@ -149,6 +150,9 @@ export default {
       } finally {
         this.deleteLoading = false
       }
+    },
+    setCreatedTime() {
+      this.createdTime = moment(this.message.created_at).fromNow()
     },
   },
 }
