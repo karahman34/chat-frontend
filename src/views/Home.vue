@@ -13,11 +13,12 @@
     <div
       v-if="messages !== null"
       id="chat-container"
+      ref="chatContainer"
       class="relative h-full flex flex-col space-y-2 py-3 bg-gray-100 overflow-y-auto"
     >
       <!-- Infinite Scroll -->
       <infinite-loading
-        v-if="currentConversation.page && !isInLastPage()"
+        v-if="currentConversation.page && !isInLastPage() && !firstLoad"
         :identifier="infiniteId"
         direction="top"
         spinner="waveDots"
@@ -108,12 +109,12 @@ export default {
         const oldArray = Array.isArray(old)
 
         if (
-          (valArray && old === undefined) ||
+          (valArray && !old) ||
           (valArray && oldArray && val.length > old.length)
         ) {
           this.$nextTick(() => {
-            this.firstLoad = false
             this.updateScroll()
+            this.firstLoad = false
           })
         }
       },
@@ -192,8 +193,14 @@ export default {
       }
     },
     updateScroll() {
+      const chatContainer = this.$refs.chatContainer
+
       if (!this.infiniteLoading) {
-        const chatContainer = this.$el.querySelector('#chat-container')
+        if (this.firstLoad) {
+          this.$nextTick(() => {
+            chatContainer.scrollTop = chatContainer.scrollHeight
+          })
+        }
 
         chatContainer.scrollTop = chatContainer.scrollHeight
       }

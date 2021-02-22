@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss" scoped>
 .message-image {
-  min-height: 200px;
-  max-height: 300px;
+  min-height: 220px;
+  max-height: 220px;
 }
 </style>
