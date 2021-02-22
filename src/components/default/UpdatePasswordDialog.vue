@@ -3,13 +3,13 @@
     <!-- The Card -->
     <div class="bg-white rounded shadow-lg py-1 w-full max-w-lg">
       <!-- Header -->
-      <div class="py-2 px-6 mb-3 border-b text-xl font-semibold">
+      <div class="py-2 px-4 mb-3 border-b text-xl font-semibold">
         <i class="mdi mdi-lock mr-1"></i>
         <span>Password</span>
       </div>
 
       <!-- Content -->
-      <div class="px-6">
+      <div class="px-4">
         <!-- The Form -->
         <form @submit.prevent="updatePassword">
           <!-- Old Password -->
