@@ -95,7 +95,7 @@ export default {
       type: Object,
       required: true,
     },
-    last: {
+    initShowUtilities: {
       type: Boolean,
       required: true,
     },
@@ -115,7 +115,7 @@ export default {
   },
 
   mounted() {
-    if (this.last) {
+    if (this.initShowUtilities) {
       this.showUtilities = true
     }
   },

@@ -32,7 +32,9 @@
         :key="message.id"
         :conversation="currentConversation"
         :message="message"
-        :last="lastMessage && lastMessage.id === message.id"
+        :init-show-utilities="
+          lastMessage && lastMessage.id === message.id && firstLoad
+        "
       ></message-card>
     </div>
   </div>
@@ -57,6 +59,7 @@ export default {
       getConversationLoading: false,
       infiniteId: +new Date(),
       infiniteLoading: false,
+      firstLoad: false,
     }
   },
 
@@ -88,6 +91,7 @@ export default {
         }
 
         this.infiniteId += 1
+        this.firstLoad = true
         this.markReadMessages()
         this.toggleReceiverEvent()
       },
@@ -108,6 +112,7 @@ export default {
           (valArray && oldArray && val.length > old.length)
         ) {
           this.$nextTick(() => {
+            this.firstLoad = false
             this.updateScroll()
           })
         }
