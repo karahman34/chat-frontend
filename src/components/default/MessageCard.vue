@@ -10,7 +10,7 @@
     <!-- Only Image -->
     <div
       v-if="message.message === null && message.file"
-      class="shadow-md overflow-hidden w-full max-w-sm cursor-pointer"
+      class="shadow-md overflow-hidden cursor-pointer w-10/12 md:w-full md:max-w-sm"
       @click="showUtilities = !showUtilities"
     >
       <message-image v-if="message.file" :image="message.file"></message-image>
