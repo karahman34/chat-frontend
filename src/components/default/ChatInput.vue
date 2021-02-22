@@ -28,7 +28,8 @@
       </button>
     </div>
 
-    <div class="flex items-center space-x-2 w-full">
+    <!-- Inputs -->
+    <div class="w-full flex items-center space-x-2">
       <!-- Input File -->
       <button
         type="button"
@@ -41,13 +42,24 @@
       <input ref="inputFile" class="hidden" type="file" @change="fileChanged" />
 
       <!-- Input Text -->
-      <input
-        type="text"
-        class="border border-gray-300 px-3 h-9 rounded-3xl transition-all outline-none w-full focus:border-gray-400 disabled:bg-gray-200 disabled:border-0 disabled:text-gray-500"
-        placeholder="Text"
-        :disabled="loading"
-        v-model="form.message"
-      />
+      <div
+        class="form-chat-input flex-grow py-2 px-3 flex relative border rounded-3xl bg-gray-200 transition-colors overflow-hidden focus-within:bg-white focus-within:border-gray-400"
+      >
+        <!-- Placeholder -->
+        <div
+          v-show="!form.message || !form.message.length"
+          class="placeholder z-10 text-gray-400 absolute outline-none"
+        >
+          Type a message
+        </div>
+
+        <!-- Message -->
+        <div
+          :contenteditable="loading ? false : true"
+          class="message z-30 min-w-full overflow-x-hidden overflow-y-auto focus:outline-none"
+          @input="form.message = $event.target.textContent"
+        ></div>
+      </div>
 
       <!-- Submit -->
       <button
@@ -90,7 +102,11 @@ export default {
 
   computed: {
     disabled() {
-      return !this.form.message.length && this.form.file === null
+      return (
+        this.form.message &&
+        !this.form.message.length &&
+        this.form.file === null
+      )
     },
   },
 
@@ -139,3 +155,16 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.form-chat-input {
+  .placeholder {
+    user-select: none;
+  }
+
+  .message {
+    min-height: 25px;
+    max-height: 250px;
+  }
+}
+</style>
