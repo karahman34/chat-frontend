@@ -42,7 +42,7 @@
         ></message-image>
 
         <!-- Text -->
-        <span>{{ message.message }}</span>
+        <span class="whitespace-pre-line">{{ message.message }}</span>
       </div>
     </div>
 

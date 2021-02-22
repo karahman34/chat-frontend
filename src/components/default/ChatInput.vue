@@ -57,7 +57,7 @@
         <div
           ref="messageInput"
           :contenteditable="loading ? false : true"
-          class="message z-30 min-w-full overflow-x-hidden overflow-y-auto focus:outline-none"
+          class="message z-30 min-w-full overflow-x-hidden overflow-y-auto whitespace-pre-line focus:outline-none"
           @input="form.message = $event.target.textContent"
           @keydown="keydownHandler"
         ></div>
