@@ -23,11 +23,11 @@
 
       <!-- Card -->
       <div
-        class="message-card py-1 px-1 shadow rounded-lg w-max flex flex-col overflow-hidden"
+        class="message-card py-1 px-1 shadow rounded-lg w-max overflow-hidden"
         :class="[
           {
             'bg-gray-800 text-white': !senderIsMe,
-            'bg-white items-end': senderIsMe,
+            'bg-white text-right': senderIsMe,
           },
         ]"
         :title="createdTime"
@@ -41,27 +41,23 @@
           :image="message.file"
         ></message-image>
 
-        <!-- Text & Date -->
-        <div class="text-right px-2 flex justify-between space-x-2">
-          <!-- Text -->
-          <div v-if="message.message" class="whitespace-pre-line">
-            {{ message.message }}
-          </div>
+        <!-- Text -->
+        <div v-if="message.message" class="px-2 whitespace-pre-line">
+          {{ message.message }}
+        </div>
 
-          <!-- Created Time -->
-          <span
-            class="created-time inline-flex items-center space-x-1 text-sm"
-            :class="{
-              'text-gray-500': senderIsMe && message.message,
-              'text-gray-200': !senderIsMe && message.message,
-              'side-bottom mt-auto': message.message,
-              'absolute right-4 bottom-2 text-gray-50':
-                message.file && !message.message,
-            }"
-          >
-            <i class="mdi mdi-clock"></i>
-            <span>{{ createdTime }}</span>
-          </span>
+        <!-- Created Time -->
+        <div
+          class="created-time px-2 text-sm flex items-center"
+          :class="{
+            'text-gray-500 justify-end': senderIsMe && message.message,
+            'text-gray-200': !senderIsMe && message.message,
+            'absolute right-2 bottom-2 text-gray-50':
+              message.file && !message.message,
+          }"
+        >
+          <i class="mdi mdi-clock mr-1"></i>
+          <span>{{ createdTime }}</span>
         </div>
       </div>
     </div>
