@@ -17,7 +17,7 @@ export default {
 .message-image {
   min-height: 220px;
   max-height: 220px;
-  min-width: 300px;
+  min-width: 150px;
   max-width: 400px;
 }
 </style>
